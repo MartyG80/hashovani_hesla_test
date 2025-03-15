@@ -3,6 +3,9 @@ import random
 import sqlite3
 import streamlit as st
 
+
+# uloženo v https://hashovaniheslatest.streamlit.app/
+
 class UserDatabase:
     """Třída pro správu databáze uživatelů."""
     def __init__(self, db_name='users.db'):
@@ -99,10 +102,15 @@ elif page == "O programu":
     
     **Jak funguje hashování hesla?**
     1. Uživatel zadá heslo.
-    2. Vygeneruje se náhodný **salt**.
-    3. Heslo je kombinováno se saltem a hashováno pomocí **SHA-256**.
-    4. Výsledek se uloží do databáze.
-    5. Při přihlášení se nový hash porovná s uloženým hashem.
+    2. Program vygeneruje náhodný **salt** – náhodný řetězec znaků, který přidáváme k heslu, aby se zabránilo útokům pomocí slovníků (dictionary attack).
+    3. Heslo je spojeno se saltem a následně **zašifrováno pomocí hashovací funkce SHA-256**. Hashování je **jednosměrná operace**, což znamená, že nelze získat původní heslo zpět.
+    4. Výsledek (hash hesla) je uložen do databáze společně se saltem.
+    5. Při přihlášení se heslo znovu spojí se stejným saltem a znovu se hashuje.
+    6. Výsledný hash se porovná s uloženým hashem v databázi – pokud jsou shodné, heslo je správné.
     
-    Program je navržen tak, aby poskytoval základní úroveň bezpečnosti při práci s hesly.
+    **Proč používáme salt?**
+    - Bez saltu by bylo možné snadno zjistit heslo pomocí **rainbow tables** (předpočítaných hashů).
+    - Každé heslo je unikátní i při stejném zadání, což zvyšuje bezpečnost.
+    
+    Tento program je ukázkou bezpečného ukládání hesel, avšak v reálných aplikacích by bylo vhodné použít **bcrypt** nebo **argon2**, které jsou odolnější vůči útokům.
     """)
