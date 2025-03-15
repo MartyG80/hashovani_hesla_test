@@ -1,5 +1,8 @@
 # Testovací program pro hashování hesel
 
+## publikovan v:
+https://hashovaniheslatest.streamlit.app/
+
 ## Popis projektu
 Tento projekt demonstruje bezpečné ukládání a ověřování hesel pomocí **SHA-256** hashování a saltingu. Program je implementován ve **Streamlit** a využívá **SQLite** databázi pro správu uživatelů.
 
